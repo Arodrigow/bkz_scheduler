@@ -5,7 +5,7 @@ const altTextImage = "Imagem da logomarca da Escola Estadual Salmen Bukzem"
 
 export default function LogoComponent() {
     return (
-        <div className="h-auto w-2/6 bg-white">
+        <div className="h-auto w-1/4 bg-white">
             <Image src={logo} alt={altTextImage}></Image>
         </div>
     )
