@@ -7,3 +7,9 @@ export type ButtonProps = {
 export type MainTitleProps = {
     text: string
 }
+
+export type AccordionProps = {
+    id: string,
+    step: string,
+    title: string,
+}
