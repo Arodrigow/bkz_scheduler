@@ -1,11 +1,21 @@
-import AccordionComponent from "../components/accordion";
+'use server'
+import MainTitleComponent from "../components/mainTitle";
+import ParagraphComponent from "../components/paragraph";
+import RegisterSection from "../components/registerSection";
 
-export default function CriarPage() {
+export default async function CriarPage() {
+    let subjectList: string[] = [];
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center gap-2">
-            <AccordionComponent id="Accordion1" step="1" title="Cadastrar as matérias"></AccordionComponent>
-            <AccordionComponent id="Accordion2" step="2" title="Cadastrar os professores"></AccordionComponent>
+        <div className="w-full min-h-screen flex flex-col justify-center items-center gap-2">
+            <MainTitleComponent text={title}></MainTitleComponent>
+            <hr className="h-4" />
+            <ParagraphComponent content={paragraphContent1}></ParagraphComponent>
+            <hr className="h-4" />
+            <RegisterSection></RegisterSection>
         </div>
 
     )
 }
+
+const title = "Criador de Horários";
+const paragraphContent1 = "Aplicativo para criação de horários da Escola Estadual Salmen Bukzem. Para gerar um horário basta seguir as instruções em cada uma das etapas.";

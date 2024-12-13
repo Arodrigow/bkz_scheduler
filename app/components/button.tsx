@@ -18,6 +18,13 @@ export default function ButtonComponent(props: ButtonProps) {
                 </Link>
             )
             break;
+        case 'add':
+            return (
+                <button type='submit' className="bg-success hover:bg-successActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
+                    {props.text}
+                </button>
+            )
+            break;
         default:
             break;
     }
