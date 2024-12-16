@@ -14,13 +14,15 @@ export default function AddEntry(props: EntryProps) {
     }
 
     return (
-            <form action={handleForm} className="flex flex-col gap-4 w-full sm:w-1/2">
-                <div className="flex flex-row gap-4">
-                    <label htmlFor="subject">Matéria: </label>
-                    <input type="text" name="subject" id="subject" className="outline rounded-xl" />
-                </div>
+        <form action={handleForm} className="flex flex-col justify-center items-center gap-4 w-full sm:w-1/2">
+            <div className="flex flex-row gap-4 flex-wrap">
+                <label htmlFor="subject">Matéria: </label>
+                <input type="text" name="subject" id="subject" className="outline rounded-xl" />
+            </div>
+            <div className="flex flex-row">
                 <ButtonComponent type="add" text="Cadastrar"></ButtonComponent>
                 <ButtonComponent type="clear" text="Apagar Tudo" onClickHandler={onClickHandler}></ButtonComponent>
-            </form>
+            </div>
+        </form>
     )
 }

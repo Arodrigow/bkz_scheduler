@@ -5,7 +5,7 @@ import RegisterSection from "../components/registerSection";
 
 export default async function CriarPage() {
     return (
-        <div className="w-full min-h-screen flex flex-col justify-center items-center gap-2">
+        <div className="w-full min-h-screen flex flex-col justify-center items-center gap-2 p-4 sm:p-12">
             <MainTitleComponent text={title}></MainTitleComponent>
             <hr className="h-4" />
             <ParagraphComponent content={paragraphContent1}></ParagraphComponent>

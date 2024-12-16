@@ -18,9 +18,8 @@ export default function AccordionComponent(props: AccordionProps) {
     }
 
     return (
-        <>
             <div className="lg:container lg:mx-auto lg:py-10 md:py-8 md:px-6 py-6 px-4 border-2">
-                <div className="lg:w-8/12 w-full mx-auto">
+                <div className="w-full mx-auto">
                     <div className="w-full md:px-6">
                         <div id="mainHeading" className="flex justify-between items-center w-full">
                             <div className="">
@@ -31,13 +30,12 @@ export default function AccordionComponent(props: AccordionProps) {
                                 <img className="transform hidden " src="https://tuk-cdn.s3.amazonaws.com/can-uploader/faq-8-svg2dark.svg" alt="toggler" />
                             </button>
                         </div>
-                        <div id="menu" className="hidden mt-6 w-full">
+                        <div id="menu" className="flex-col hidden mt-6 w-full mb-6">
                             <ParagraphComponent content={props.stepGuide}></ParagraphComponent>
                             {props.children}
                         </div>
                     </div>
                 </div>
             </div>
-        </>
     )
 }

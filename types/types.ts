@@ -27,8 +27,17 @@ export type EntryProps = {
     type: 'subject' | 'teacher',
     list: string[],
     setList: (new_state: string[]) => void,
+    title?: string
 }
 
 export type EntryListProps = {
-    list: string[]
+    title?: string
+    list: string[],
+    setList: (new_state: string[]) => void,
+}
+
+export type ListUnitProps = {
+    text: string,
+    list: string[],
+    setList: (new_state: string[]) => void,
 }

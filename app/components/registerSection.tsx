@@ -10,15 +10,15 @@ export default function RegisterSection() {
     const [teacherList, setTeacherList] = usePersistState<string[]>([], 'teacherList');
 
     return (
-        <>
+        <div className="flex flex-col gap-4 w-full ">
             <AccordionComponent id="Accordion1" step="1" title="Cadastrar as matérias" stepGuide={step1}>
-                <AddWraper list={subjectList} setList={setSubjectList} type="subject"></AddWraper>
+                <AddWraper list={subjectList} setList={setSubjectList} type="subject" title="Lista de matérias"></AddWraper>
             </AccordionComponent>
             <AccordionComponent id="Accordion2" step="2" title="Cadastrar os professores" stepGuide={step2}>
-                <AddWraper list={teacherList} setList={setTeacherList} type="teacher"></AddWraper>
+                <AddWraper list={teacherList} setList={setTeacherList} type="teacher" title="Lista de professores"></AddWraper>
             </AccordionComponent>
             {/* <AccordionComponent id="Accordion3" step="3" title="Relacionar professores e matéras" stepGuide={step3}></AccordionComponent> */}
-        </>
+        </div>
 
     )
 }

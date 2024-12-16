@@ -20,14 +20,21 @@ export default function ButtonComponent(props: ButtonProps) {
             break;
         case 'add':
             return (
-                <button type='submit' className="bg-success hover:bg-successActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
+                <button type='submit' className="w-32 bg-success hover:bg-successActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
                     {props.text}
                 </button>
             )
             break;
         case 'clear':
             return (
-                <button type='button' onClick={props.onClickHandler} className="bg-danger hover:bg-dangerActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
+                <button type='button' onClick={props.onClickHandler} className="w-32 bg-danger hover:bg-dangerActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
+                    {props.text}
+                </button>
+            )
+            break;
+        case 'delete':
+            return (
+                <button type='button' onClick={props.onClickHandler} className="w-24 bg-danger hover:bg-dangerActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
                     {props.text}
                 </button>
             )
