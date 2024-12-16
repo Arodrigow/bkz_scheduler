@@ -4,7 +4,6 @@ import ParagraphComponent from "../components/paragraph";
 import RegisterSection from "../components/registerSection";
 
 export default async function CriarPage() {
-    let subjectList: string[] = [];
     return (
         <div className="w-full min-h-screen flex flex-col justify-center items-center gap-2">
             <MainTitleComponent text={title}></MainTitleComponent>

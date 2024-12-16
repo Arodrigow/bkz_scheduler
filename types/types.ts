@@ -25,5 +25,5 @@ export type ParagraphProps = {
 export type EntryProps = {
     type: 'subject' | 'teacher',
     list: string[],
-    setList: Dispatch<SetStateAction<string[]>>,
+    setList: (new_state: string[]) => void,
 }

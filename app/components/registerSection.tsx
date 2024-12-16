@@ -1,17 +1,19 @@
 'use client'
-import { useState } from "react"
+
 import AccordionComponent from "./accordion"
 import AddEntry from "./addEntry"
+import usePersistState from "../utils/usePersistState";
 
 export default function RegisterSection() {
-    const [subjectList, setSubjectList] = useState(['']);
-    const [teacherList, setTeacherList] = useState(['']);
+    const [subjectList, setSubjectList] = usePersistState<string[]>([], 'subjectList');
+    const [teacherList, setTeacherList] = usePersistState<string[]>([], 'teacherList');
 
     return (
         <>
             <AccordionComponent id="Accordion1" step="1" title="Cadastrar as matérias" stepGuide={step1}>
                 <AddEntry type="subject" list={subjectList} setList={setSubjectList}></AddEntry>
             </AccordionComponent>
+            <p>{subjectList ? subjectList : 'não novo'}</p>
             <AccordionComponent id="Accordion2" step="2" title="Cadastrar os professores" stepGuide={step2}>
                 <AddEntry type="teacher" list={teacherList} setList={setTeacherList}></AddEntry>
             </AccordionComponent>

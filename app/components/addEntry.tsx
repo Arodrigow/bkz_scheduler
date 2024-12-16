@@ -4,10 +4,10 @@ import ButtonComponent from "./button";
 
 export default function AddEntry(props: EntryProps) {
     const handleForm = () => {
-        console.log('novo');
-        props.list.push('novo');
-        console.log(props.list)
-        props.setList(props.list);
+
+        let aux:string[] = Array.from(props.list)
+        aux.push('novo');
+        props.setList(aux);
     }
 
     return (
