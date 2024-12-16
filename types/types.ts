@@ -28,3 +28,7 @@ export type EntryProps = {
     list: string[],
     setList: (new_state: string[]) => void,
 }
+
+export type EntryListProps = {
+    list: string[]
+}

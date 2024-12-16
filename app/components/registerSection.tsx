@@ -3,6 +3,7 @@
 import AccordionComponent from "./accordion"
 import AddEntry from "./addEntry"
 import usePersistState from "../utils/usePersistState";
+import AddWraper from "./addWraper";
 
 export default function RegisterSection() {
     const [subjectList, setSubjectList] = usePersistState<string[]>([], 'subjectList');
@@ -11,11 +12,10 @@ export default function RegisterSection() {
     return (
         <>
             <AccordionComponent id="Accordion1" step="1" title="Cadastrar as matérias" stepGuide={step1}>
-                <AddEntry type="subject" list={subjectList} setList={setSubjectList}></AddEntry>
+                <AddWraper list={subjectList} setList={setSubjectList} type="subject"></AddWraper>
             </AccordionComponent>
-            <p>{subjectList ? subjectList : 'não novo'}</p>
             <AccordionComponent id="Accordion2" step="2" title="Cadastrar os professores" stepGuide={step2}>
-                <AddEntry type="teacher" list={teacherList} setList={setTeacherList}></AddEntry>
+                <AddWraper list={teacherList} setList={setTeacherList} type="teacher"></AddWraper>
             </AccordionComponent>
             {/* <AccordionComponent id="Accordion3" step="3" title="Relacionar professores e matéras" stepGuide={step3}></AccordionComponent> */}
         </>

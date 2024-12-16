@@ -4,7 +4,7 @@ import ButtonComponent from "./button";
 
 export default function AddEntry(props: EntryProps) {
     const handleForm = () => {
-        let aux:string[] = Array.from(props.list)
+        let aux: string[] = Array.from(props.list)
         aux.push('novo');
         props.setList(aux);
     }
@@ -14,11 +14,13 @@ export default function AddEntry(props: EntryProps) {
     }
 
     return (
-        <form action={handleForm}>
-            <label htmlFor="subject">Matéria: </label>
-            <input type="text" name="subject" id="subject" />
-            <ButtonComponent type="add" text="Cadastrar"></ButtonComponent>
-            <ButtonComponent type="clear" text="Apagar Tudo" onClickHandler={onClickHandler}></ButtonComponent>
-        </form>
+            <form action={handleForm} className="flex flex-col gap-4 w-full sm:w-1/2">
+                <div className="flex flex-row gap-4">
+                    <label htmlFor="subject">Matéria: </label>
+                    <input type="text" name="subject" id="subject" className="outline rounded-xl" />
+                </div>
+                <ButtonComponent type="add" text="Cadastrar"></ButtonComponent>
+                <ButtonComponent type="clear" text="Apagar Tudo" onClickHandler={onClickHandler}></ButtonComponent>
+            </form>
     )
 }
