@@ -4,10 +4,13 @@ import ButtonComponent from "./button";
 
 export default function AddEntry(props: EntryProps) {
     const handleForm = () => {
-
         let aux:string[] = Array.from(props.list)
         aux.push('novo');
         props.setList(aux);
+    }
+
+    const onClickHandler = () => {
+        props.setList([])
     }
 
     return (
@@ -15,6 +18,7 @@ export default function AddEntry(props: EntryProps) {
             <label htmlFor="subject">Matéria: </label>
             <input type="text" name="subject" id="subject" />
             <ButtonComponent type="add" text="Cadastrar"></ButtonComponent>
+            <ButtonComponent type="clear" text="Apagar Tudo" onClickHandler={onClickHandler}></ButtonComponent>
         </form>
     )
 }

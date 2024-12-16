@@ -3,7 +3,8 @@ import { Dispatch, ReactNode, SetStateAction } from "react"
 export type ButtonProps = {
     type: string,
     text: string,
-    url?: string
+    url?: string,
+    onClickHandler?: () => void
 }
 
 export type MainTitleProps = {
