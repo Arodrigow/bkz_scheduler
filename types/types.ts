@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react"
+import { ReactNode } from "react"
 
 export type ButtonProps = {
     type: string,
@@ -24,20 +24,69 @@ export type ParagraphProps = {
 }
 
 export type EntryProps = {
-    type: 'subject' | 'teacher',
-    list: string[],
-    setList: (new_state: string[]) => void,
+    Entry: EntryPropsTeacher | EntryPropsSubject,
+}
+
+export type EntryPropsTeacher = {
+    type: 'teacher',
+    list: teacherObject[],
+    setList: SetList,
+    title?: string
+}
+export type EntryPropsSubject = {
+    type: 'subject',
+    list: subjectObject[],
+    setList: SetList,
     title?: string
 }
 
 export type EntryListProps = {
+    EntryList: EntryListPropsSubject | EntryListPropsTeacher
+}
+
+export type EntryListPropsSubject = {
+    type: 'subject',
     title?: string
-    list: string[],
-    setList: (new_state: string[]) => void,
+    list: subjectObject[] ,
+    setList: SetList
+}
+
+export type EntryListPropsTeacher= {
+    type: 'teacher',
+    title?: string
+    list: teacherObject[] ,
+    setList: SetList,
 }
 
 export type ListUnitProps = {
+    type: 'teacher' | 'subject',
     text: string,
-    list: string[],
-    setList: (new_state: string[]) => void,
+    list: subjectObject[] | teacherObject[],
+    setList: SetList    
+}
+export type SetList = <T extends subjectObject[] | teacherObject[]>(new_state: T) => void;
+
+
+export type needsObject = {
+    dayOfWeek: 1 | 2 | 3 | 4 | 5,
+    hour: 1 | 2 | 3 | 4 | 5 | 6
+}
+
+export type restrictionObject = {
+    dayOfWeek: 1 | 2 | 3 | 4 | 5,
+    hour: 1 | 2 | 3 | 4 | 5 | 6
+}
+
+export type subjectObject = {
+    title: string,
+    wordLoad: number,
+    restrictions: Array<restrictionObject>,
+    musts: Array<restrictionObject>
+}
+
+export type teacherObject = {
+    name: string,
+    subjects: Array<subjectObject>,
+    restrictions: Array<restrictionObject>
+    musts: Array<restrictionObject>
 }

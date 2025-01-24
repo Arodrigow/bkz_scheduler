@@ -1,26 +1,44 @@
 'use client'
-import { EntryProps } from "@/types/types";
+import { EntryProps, subjectObject, teacherObject } from "@/types/types";
 import ButtonComponent from "./button";
 
 export default function AddEntry(props: EntryProps) {
     const handleForm = () => {
-        const input = (document.getElementById(props.type + 'Input') as HTMLInputElement).value
-        if (input) {
-            let aux: string[] = Array.from(props.list)
-            aux.push(input);
-            props.setList(aux);
+        const input = (document.getElementById(props.Entry.type + 'Input') as HTMLInputElement).value
+        if (input && props.Entry.type ==='subject') {
+            let aux: subjectObject[] = Array.from(props.Entry.list)
+            const subAux: subjectObject = {
+                title: input,
+                wordLoad: 0,
+                musts:[],
+                restrictions:[]
+            }
+            aux.push(subAux);
+            props.Entry.setList(aux);
+        }
+
+        if (input && props.Entry.type ==='teacher') {
+            let aux: teacherObject[] = Array.from(props.Entry.list)
+            const teacherAux: teacherObject = {
+                name: input,
+                subjects:[],
+                musts:[],
+                restrictions:[]
+            }
+            aux.push(teacherAux);
+            props.Entry.setList(aux);
         }
     }
 
     const onClickHandler = () => {
-        props.setList([])
+        props.Entry.setList([])
     }
 
     return (
         <form action={handleForm} className="flex flex-col justify-center items-center gap-4 w-full sm:w-1/2">
             <div className="flex flex-row gap-4 flex-wrap justify-center items-center">
-                <label htmlFor={props.type + 'Input'}>Matéria: </label>
-                <input type="text" name={props.type + 'Input'} id={props.type + "Input"} className="outline outline-school rounded-xl p-2" />
+                <label htmlFor={props.Entry.type + 'Input'}>{props.Entry.type === 'subject' ? 'Matéria: ' : 'Professor: '}</label>
+                <input type="text" name={props.Entry.type + 'Input'} id={props.Entry.type + "Input"} className="outline outline-school rounded-xl p-2" />
             </div>
             <div className="flex flex-row">
                 <ButtonComponent type="add" text="Cadastrar"></ButtonComponent>

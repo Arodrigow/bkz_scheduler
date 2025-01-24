@@ -1,12 +1,21 @@
-import { ListUnitProps } from "@/types/types";
+import { ListUnitProps, subjectObject, teacherObject } from "@/types/types";
 import ButtonComponent from "./button";
 
 export default function ListUnit(props: ListUnitProps){
     const onClickHandler = () =>{
-        const index = props.list.findIndex((value) => value === props.text);
-        let aux: string[] = Array.from(props.list);
-        aux.splice(index,1);
-        props.setList(aux);
+        if(props.type === 'subject'){            
+            const index = (props.list as subjectObject[]).findIndex((value) => value.title === props.text);
+            let aux:Array<subjectObject> = Array.from(props.list as Array<subjectObject>);
+            aux.splice(index,1);
+            props.setList(aux);
+        }
+
+        if(props.type === 'teacher'){            
+            const index = (props.list as teacherObject[]).findIndex((value) => value.name === props.text);
+            let aux:Array<teacherObject> = Array.from(props.list as Array<teacherObject>);
+            aux.splice(index,1);
+            props.setList(aux);
+        }
     }
 
     return (
