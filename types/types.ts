@@ -66,6 +66,14 @@ export type ListUnitProps = {
 }
 export type SetList = <T extends subjectObject[] | teacherObject[]>(new_state: T) => void;
 
+export type InfoSetProps = {
+    Entry: EntryPropsTeacher | EntryPropsSubject,
+    EntryTarget: subjectObject | teacherObject,
+    setEntryTargetSubject?: ((newState: subjectObject) => void),
+    setEntryTargetTeacher?: ((newState: teacherObject) => void)
+}
+export type SetEntryTarget = <T extends subjectObject | teacherObject>(new_state: T) => void;
+
 
 export type needsObject = {
     dayOfWeek: 1 | 2 | 3 | 4 | 5,
