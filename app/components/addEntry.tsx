@@ -9,7 +9,7 @@ export default function AddEntry(props: EntryProps) {
             let aux: subjectObject[] = Array.from(props.Entry.list)
             const subAux: subjectObject = {
                 title: input,
-                wordLoad: 0,
+                workLoad: 0,
                 musts:[],
                 restrictions:[]
             }
