@@ -79,7 +79,7 @@ export type restrictionObject = {
 
 export type subjectObject = {
     title: string,
-    wordLoad: number,
+    workLoad: number,
     restrictions: Array<restrictionObject>,
     musts: Array<restrictionObject>
 }

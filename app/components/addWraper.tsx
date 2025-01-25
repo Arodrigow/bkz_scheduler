@@ -1,4 +1,4 @@
-import { EntryListProps, EntryProps } from "@/types/types";
+import { EntryProps } from "@/types/types";
 import AddEntry from "./addEntry";
 import ListComponent from "./list";
 
