@@ -47,14 +47,14 @@ export type EntryListProps = {
 export type EntryListPropsSubject = {
     type: 'subject',
     title?: string
-    list: subjectObject[] ,
+    list: subjectObject[],
     setList: SetList
 }
 
-export type EntryListPropsTeacher= {
+export type EntryListPropsTeacher = {
     type: 'teacher',
     title?: string
-    list: teacherObject[] ,
+    list: teacherObject[],
     setList: SetList,
 }
 
@@ -62,16 +62,9 @@ export type ListUnitProps = {
     type: 'teacher' | 'subject',
     text: string,
     list: subjectObject[] | teacherObject[],
-    setList: SetList    
+    setList: SetList
 }
 export type SetList = <T extends subjectObject[] | teacherObject[]>(new_state: T) => void;
-
-export type InfoSetProps = {
-    Entry: EntryPropsTeacher | EntryPropsSubject,
-    EntryTarget: subjectObject | teacherObject,
-    setEntryTargetSubject?: ((newState: subjectObject) => void),
-    setEntryTargetTeacher?: ((newState: teacherObject) => void)
-}
 
 export type restrictionObject = {
     dayOfWeek: 'Segunda-feira' | 'Terça-feira' | 'Quarta-feira' | 'Quinta-feira' | 'Sexta-feira',
@@ -90,4 +83,20 @@ export type teacherObject = {
     subjects: Array<subjectObject>,
     restrictions: Array<restrictionObject>
     musts: Array<restrictionObject>
+}
+
+export type SetterProps = {
+    id: string,    
+    Entry: EntryPropsTeacher | EntryPropsSubject,
+    EntryTarget: subjectObject | teacherObject,
+    setEntryTargetSubject?: ((newState: subjectObject) => void),
+    setEntryTargetTeacher?: ((newState: teacherObject) => void),
+}
+
+
+export type InfoSetProps = {
+    Entry: EntryPropsTeacher | EntryPropsSubject,
+    EntryTarget: subjectObject | teacherObject,
+    setEntryTargetSubject?: ((newState: subjectObject) => void),
+    setEntryTargetTeacher?: ((newState: teacherObject) => void),
 }

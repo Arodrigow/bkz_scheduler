@@ -8,16 +8,12 @@ export default function Info(props: InfoSetProps) {
 
         if (props.Entry.type === 'subject' && props.setEntryTargetSubject) {
             const index = (props.Entry.list as subjectObject[]).findIndex((i) => i.title === value);
-            console.log(index);
-            console.log(props.Entry.list)
             props.setEntryTargetSubject(props.Entry.list[index] as subjectObject)
-            console.log((props.EntryTarget as subjectObject).title)
         }
 
         if (props.Entry.type === 'teacher' && props.setEntryTargetTeacher) {
             const index = (props.Entry.list as teacherObject[]).findIndex((i) => i.name === value);
             props.setEntryTargetTeacher(props.Entry.list[index] as teacherObject)
-            console.log((props.EntryTarget as teacherObject).name)
         }
     }
 
