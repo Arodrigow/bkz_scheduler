@@ -52,6 +52,9 @@ export default function RegisterSection() {
             <AccordionComponent id="Accordion3" step="3" title="Cadastrar os professores" stepGuide={step3}>
                 <AddWraper Entry={teacherEntry}></AddWraper>
             </AccordionComponent>
+            <AccordionComponent id="Accordion4" step="4" title="Informações dos professores" stepGuide={step4}>
+                <InfoSetterWrapper Entry={teacherEntry} EntryTarget={teacher} setEntryTargetTeacher={setTeacher}></InfoSetterWrapper>
+            </AccordionComponent>
         </div>
 
     )
@@ -60,3 +63,4 @@ export default function RegisterSection() {
 const step1 = "Cadastre todas as matérias que serão ofertadas no ano letivo e precisam ser organizadas.";
 const step2 = "Com as matérias cadastradas, agora deve-se completar o cadastro com as informações das matérias, como carga horária e restrições de horário.";
 const step3 = "Após o cadastro de todas as matérias, é hora de cadastrar todos os professores.";
+const step4 = "Com os professores cadastradas, agora deve-se completar o cadastro com as informações dos professores, como as materias de cada um, restrições de horário e obrigatoriedades.";
