@@ -72,16 +72,9 @@ export type InfoSetProps = {
     setEntryTargetSubject?: ((newState: subjectObject) => void),
     setEntryTargetTeacher?: ((newState: teacherObject) => void)
 }
-export type SetEntryTarget = <T extends subjectObject | teacherObject>(new_state: T) => void;
-
-
-export type needsObject = {
-    dayOfWeek: 1 | 2 | 3 | 4 | 5,
-    hour: 1 | 2 | 3 | 4 | 5 | 6
-}
 
 export type restrictionObject = {
-    dayOfWeek: 1 | 2 | 3 | 4 | 5,
+    dayOfWeek: 'Segunda-feira' | 'Terça-feira' | 'Quarta-feira' | 'Quinta-feira' | 'Sexta-feira',
     hour: 1 | 2 | 3 | 4 | 5 | 6
 }
 
