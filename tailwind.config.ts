@@ -18,7 +18,8 @@ export default {
         successActive: "#0BDA51",
         danger: "#D2042D",
         dangerActive: "#F88379",
-        school: "#063970"
+        school: "#063970",
+        schoolActive: "#117cf0",
       },
     },
   },

@@ -39,6 +39,13 @@ export default function ButtonComponent(props: ButtonProps) {
                 </button>
             )
             break;
+        case 'choose':
+            return (
+                <button type='button' onClick={props.onClickHandler} className="w-24 bg-school hover:bg-schoolActive text-white text-sm py-2.5 px-5 mr-2 mb-2 rounded-xl transition duration-300">
+                    {props.text}
+                </button>
+            )
+            break;
         default:
             break;
     }
