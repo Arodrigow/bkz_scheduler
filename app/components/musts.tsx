@@ -6,7 +6,7 @@ export default function Musts(props: SetterProps){
     return (
         <div id={props.id} hidden>
             <ParagraphComponent content={explanation}></ParagraphComponent>
-            <WeekGrid Entry={props.Entry} EntryTarget={props.EntryTarget} setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher} id={props.Entry.type+"MustsGrid"}></WeekGrid>
+            <WeekGrid Entry={props.Entry} EntryTarget={props.EntryTarget} setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher} id={props.Entry.type+"MustsGrid"} gridType="must"></WeekGrid>
         </div>
     )
 }

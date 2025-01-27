@@ -87,6 +87,7 @@ export type teacherObject = {
 
 export type SetterProps = {
     id: string,    
+    gridType?: 'must' | 'restriction',
     Entry: EntryPropsTeacher | EntryPropsSubject,
     EntryTarget: subjectObject | teacherObject,
     setEntryTargetSubject?: ((newState: subjectObject) => void),
