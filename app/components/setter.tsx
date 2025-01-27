@@ -3,6 +3,7 @@ import MainTitleComponent from "./mainTitle";
 import ButtonComponent from "./button";
 import WorkLoad from "./workload";
 import Musts from "./musts";
+import Restrictions from "./restrictions";
 
 
 export default function Setter(props: InfoSetProps) {
@@ -29,7 +30,7 @@ export default function Setter(props: InfoSetProps) {
                 musts.hidden = false;
                 restrictions.hidden = true
             }
-            if (type === 'restrictions') {
+            if (type === 'restrictionsInfo') {
                 workLoad.hidden = true;
                 musts.hidden = true;
                 restrictions.hidden = false
@@ -50,15 +51,14 @@ export default function Setter(props: InfoSetProps) {
                         <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler('subjectInfo')}></ButtonComponent>
                 }
                 <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler('mustsInfo')}></ButtonComponent>
-                <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler('restrictions')}></ButtonComponent>
+                <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler('restrictionsInfo')}></ButtonComponent>
             </div>
             <div>
 
                 <WorkLoad Entry={props.Entry} EntryTarget={props.EntryTarget} id="workLoadInfo" setEntryTargetSubject={props.setEntryTargetSubject}></WorkLoad>
                 <div id="subjectInfo" hidden>subjectInfo</div>
                 <Musts Entry={props.Entry} EntryTarget={props.EntryTarget} id="mustsInfo" setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher}></Musts>
-                <div id="restrictionsInfo" hidden>Restrictions</div>
-
+                <Restrictions Entry={props.Entry} EntryTarget={props.EntryTarget} id="restrictionsInfo" setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher}></Restrictions>
             </div>
         </div>
     )

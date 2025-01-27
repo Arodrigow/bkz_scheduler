@@ -6,6 +6,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
     const onClickHandler = (id: string, day: 'Segunda-feira' | 'Terça-feira' | 'Quarta-feira' | 'Quinta-feira' | 'Sexta-feira', hour: 1 | 2 | 3 | 4 | 5 | 6) => {
         let el = (document.getElementById(id) as HTMLElement)
+
         if (setEntryTargetSubject) {
             const index = (Entry.list as subjectObject[]).findIndex((value) => value.title === (EntryTarget as subjectObject).title)
             let aux: Array<subjectObject> = Array.from(Entry.list as Array<subjectObject>);
@@ -24,14 +25,14 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
                 })
 
                 Entry.setList(aux);
-                console.log(el.style.backgroundColor)
+
                 el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
             if (gridType === 'restriction') {
 
-                const auxIndex = aux[index].musts.findIndex((value) => value.dayOfWeek === day && value.hour === hour)
+                const auxIndex = aux[index].restrictions.findIndex((value) => value.dayOfWeek === day && value.hour === hour)
 
-                auxIndex === -1 ? aux[index].musts.push({ dayOfWeek: day, hour }) : aux[index].musts.splice(auxIndex, 1);
+                auxIndex === -1 ? aux[index].restrictions.push({ dayOfWeek: day, hour }) : aux[index].restrictions.splice(auxIndex, 1);
 
                 setEntryTargetSubject({
                     musts: EntryTarget.musts,
@@ -126,7 +127,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
                                 <button
                                     className={
                                         `col-span-1 border border-school shadow-md flex justify-center items-center rounded-md
-                                        ${isMarked(day, h) && gridType === 'must' ? 'bg-mustMarkerd' : gridType === 'restriction'? 'bg-restrictionMarked' : 'bg-white'}
+                                        ${isMarked(day, h) && gridType === 'must' ? 'bg-mustMarkerd' : isMarked(day, h) && gridType === 'restriction'? 'bg-restrictionMarked' : 'bg-white'}
                                         `
                                     }
                                     key={Entry.type + 'GridBody' + h + day + ii}
