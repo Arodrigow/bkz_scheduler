@@ -2,6 +2,7 @@ import { InfoSetProps } from "@/types/types";
 import MainTitleComponent from "./mainTitle";
 import ButtonComponent from "./button";
 import WorkLoad from "./workload";
+import Musts from "./musts";
 
 
 export default function Setter(props: InfoSetProps) {
@@ -18,7 +19,12 @@ export default function Setter(props: InfoSetProps) {
                 musts.hidden = true;
                 restrictions.hidden = true;
             }
-            if (type === 'musts') {
+            if (type === 'subjectInfo') {
+                subjectInfo.hidden = false;
+                musts.hidden = true;
+                restrictions.hidden = true;
+            }
+            if (type === 'mustsInfo') {
                 workLoad.hidden = true;
                 musts.hidden = false;
                 restrictions.hidden = true
@@ -34,24 +40,23 @@ export default function Setter(props: InfoSetProps) {
 
 
     return (
-        <div className="w-full sm:w-1/2 sm:border-l-2 border-school flex flex-col gap-8">
+        <div className="w-full sm:w-3/5 sm:border-l-2 border-school flex flex-col gap-8">
             <MainTitleComponent text="Cadastrar informações"></MainTitleComponent>
-            <div className="w-full flex flex-row gap-4 justify-around items-center">
+            <div className="w-full flex flex-row gap-4 flex-wrap justify-around items-center">
                 {
                     props.Entry.type === 'subject' ?
                         <ButtonComponent text="Carga horária" type="choose" onClickHandler={() => handler('workLoad')}></ButtonComponent>
                         :
-                        <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler('workLoad')}></ButtonComponent>
+                        <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler('subjectInfo')}></ButtonComponent>
                 }
-                <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler('musts')}></ButtonComponent>
+                <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler('mustsInfo')}></ButtonComponent>
                 <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler('restrictions')}></ButtonComponent>
             </div>
             <div>
 
                 <WorkLoad Entry={props.Entry} EntryTarget={props.EntryTarget} id="workLoadInfo" setEntryTargetSubject={props.setEntryTargetSubject}></WorkLoad>
-                <div id="workLoadInfo" hidden>Workload</div>
                 <div id="subjectInfo" hidden>subjectInfo</div>
-                <div id="mustsInfo" hidden>Musts</div>
+                <Musts Entry={props.Entry} EntryTarget={props.EntryTarget} id="mustsInfo" setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher}></Musts>
                 <div id="restrictionsInfo" hidden>Restrictions</div>
 
             </div>

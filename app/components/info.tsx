@@ -18,7 +18,7 @@ export default function Info(props: InfoSetProps) {
     }
 
     return (
-        <form className="flex flex-col justify-center items-center gap-4 w-full sm:w-1/2">
+        <form className="flex flex-col justify-center items-center gap-4 w-full sm:w-2/5">
             <div className="flex flex-row gap-4 flex-wrap justify-center items-center">
                 <label htmlFor={props.Entry.type + 'Input'}>{props.Entry.type === 'subject' ? 'Matéria: ' : 'Professor: '}</label>
                 <select onChange={handleSelect} value={props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).title : (props.EntryTarget as teacherObject).name} name={props.Entry.type + "Select"} id={props.Entry.type + "Select"} className="outline outline-school rounded-xl p-2">
