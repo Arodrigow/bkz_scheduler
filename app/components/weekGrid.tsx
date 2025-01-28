@@ -26,6 +26,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
+                if(el)
                 el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
             if (gridType === 'restriction') {
@@ -43,6 +44,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
+                if(el)
                 el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
             }
         }
@@ -66,6 +68,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
+                if(el)
                 el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
             if (gridType === 'restriction') {
@@ -83,6 +86,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
+                if(el)
                 el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
             }
         }
@@ -132,7 +136,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
                                     }
                                     key={Entry.type + 'GridBody' + h + day + ii}
                                     id={Entry.type + 'GridBody' + h + day + ii}
-                                    onClick={() => { onClickHandler(Entry.type + 'GridBody' + h + day + ii, day, h) }}
+                                    onClick={() => { onClickHandler(Entry.type + gridType + 'GridBody' + h + day + ii, day, h) }}
                                 ></button>
                             )}
                         </div>
