@@ -13,7 +13,7 @@ export default function InfoSetterWrapper(props: InfoSetProps) {
                     </>
                     : <>
                         <Info Entry={props.Entry} EntryTarget={props.EntryTarget} setEntryTargetTeacher={props.setEntryTargetTeacher}></Info>
-                        <Setter Entry={props.Entry} EntryTarget={props.EntryTarget} setEntryTargetTeacher={props.setEntryTargetTeacher}></Setter>
+                        <Setter Entry={props.Entry} SubjectEntry={props.SubjectEntry} EntryTarget={props.EntryTarget} setEntryTargetTeacher={props.setEntryTargetTeacher}></Setter>
                     </>
             }
         </div>

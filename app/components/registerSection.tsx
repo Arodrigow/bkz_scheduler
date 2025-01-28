@@ -53,7 +53,7 @@ export default function RegisterSection() {
                 <AddWraper Entry={teacherEntry}></AddWraper>
             </AccordionComponent>
             <AccordionComponent id="Accordion4" step="4" title="Informações dos professores" stepGuide={step4}>
-                <InfoSetterWrapper Entry={teacherEntry} EntryTarget={teacher} setEntryTargetTeacher={setTeacher}></InfoSetterWrapper>
+                <InfoSetterWrapper Entry={teacherEntry} SubjectEntry={subjectEntry} EntryTarget={teacher} setEntryTargetTeacher={setTeacher}></InfoSetterWrapper>
             </AccordionComponent>
         </div>
 

@@ -71,7 +71,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
                 if(el)
                 el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
-            
+
             if (gridType === 'restriction') {
 
                 const auxIndex = aux[index].restrictions.findIndex((value) => value.dayOfWeek === day && value.hour === hour);

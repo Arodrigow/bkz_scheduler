@@ -4,6 +4,7 @@ import ButtonComponent from "./button";
 import WorkLoad from "./workload";
 import Musts from "./musts";
 import Restrictions from "./restrictions";
+import TeacherSubjects from "./teacherSubjects";
 
 
 export default function Setter(props: InfoSetProps) {
@@ -30,12 +31,14 @@ export default function Setter(props: InfoSetProps) {
             if (type === mustId) {
                 workLoad.hidden = true;
                 musts.hidden = false;
-                restrictions.hidden = true
+                restrictions.hidden = true;
+                subjectInfo.hidden = true;
             }
             if (type === restrictionId) {
                 workLoad.hidden = true;
                 musts.hidden = true;
-                restrictions.hidden = false
+                restrictions.hidden = false;
+                subjectInfo.hidden = true;
             }
         }
 
@@ -50,7 +53,7 @@ export default function Setter(props: InfoSetProps) {
                     props.Entry.type === 'subject' ?
                         <ButtonComponent text="Carga horária" type="choose" onClickHandler={() => handler(Ids.subjectWorkLoadId)}></ButtonComponent>
                         :
-                        <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler(Ids.teacherSubjectId)}></ButtonComponent>
+                        <ButtonComponent text="Matérias" type="choose" onClickHandler={() => handler(Ids.teacherSubjectId)}></ButtonComponent>
                 }
                 <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler(mustId)}></ButtonComponent>
                 <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler(restrictionId)}></ButtonComponent>
@@ -65,7 +68,13 @@ export default function Setter(props: InfoSetProps) {
                             setEntryTargetSubject={props.setEntryTargetSubject}
                         ></WorkLoad>
                         :
-                        <div id="subjectInfo" hidden>subjectInfo</div>
+                        <TeacherSubjects
+                            Entry={props.Entry}
+                            SubjectEntry={props.SubjectEntry}
+                            EntryTarget={props.EntryTarget}
+                            id={Ids.teacherSubjectId}
+                            setEntryTargetTeacher={props.setEntryTargetTeacher}
+                        ></TeacherSubjects>
                 }
 
                 <Musts
