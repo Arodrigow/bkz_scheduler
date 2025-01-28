@@ -5,6 +5,8 @@ import usePersistState from "../utils/usePersistState";
 import AddWraper from "./addWraper";
 import { EntryPropsSubject, EntryPropsTeacher, SetList, subjectObject, teacherObject } from "@/types/types";
 import InfoSetterWrapper from "./infoSetterWrapper";
+import ButtonComponent from "./button";
+import { getSchedule } from "./request/getSchedule";
 
 export default function RegisterSection() {
     const [subjectList, setSubjectList] = usePersistState<subjectObject[]>([], 'subjectList');
@@ -55,6 +57,7 @@ export default function RegisterSection() {
             <AccordionComponent id="Accordion4" step="4" title="Informações dos professores" stepGuide={step4}>
                 <InfoSetterWrapper Entry={teacherEntry} SubjectEntry={subjectEntry} EntryTarget={teacher} setEntryTargetTeacher={setTeacher}></InfoSetterWrapper>
             </AccordionComponent>
+            <ButtonComponent text="GERAR HORÁRIO" type="choose" onClickHandler={() => getSchedule(teacherList)}></ButtonComponent>
         </div>
 
     )
