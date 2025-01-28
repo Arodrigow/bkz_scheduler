@@ -1,5 +1,6 @@
 import { InfoSetProps, subjectObject, teacherObject } from "@/types/types";
 import arrayCompare from "../utils/arrayCompare";
+import { sortArray } from "../utils/sortArray";
 
 export default function Info(props: InfoSetProps) {
 
@@ -33,57 +34,81 @@ export default function Info(props: InfoSetProps) {
                     }
                 </select>
             </div>
-            <div>
+            <div className="flex flex-col gap-4 w-full justify-center items-start">
+
+                <div className="flex flex-row gap-2">
+                    <span className="text-school font-bold">
+                        {
+                            props.Entry.type === 'subject' ? 'Disciplina: '
+                                : 'Professor: '
+                        }
+                    </span>
+                    <span>
+                        {
+                            props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).title
+                                : (props.EntryTarget as teacherObject).name
+                        }
+                    </span>
+                </div>
+                <div className="flex flex-row gap-2">
+                    <span className="text-school font-bold">
+                        {
+                            props.Entry.type === 'subject' ? 'Carga horária: '
+                                : 'Disciplinas: '
+                        }
+                    </span>
+                    <span>
+                        {
+                            props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).workLoad
+                                : arrayCompare((props.EntryTarget as teacherObject).subjects, []) ? 'Nenhum cadastro' :
+                                    <ul>
+                                        {
+
+                                            (props.EntryTarget as teacherObject)
+                                                .subjects
+                                                .sort((a, b) => sortArray(a.title, b.title, 'string'))
+                                                .map((subs, i) =>
+
+                                                    <li key={"TeacherSubjects" + i}>{subs.title}</li>
+                                                )
+                                        }
+                                    </ul>
+                        }
+                    </span>
+                </div>
                 <div>
-                    <div>
-                        <span>
-                            {
-                                props.Entry.type === 'subject' ? 'Disciplina: '
-                                    : 'Professor: '
-                            }
-                        </span>
-                        <span>
-                            {
-                                props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).title
-                                    : (props.EntryTarget as teacherObject).name
-                            }
-                        </span>
-                    </div>
-                    <div>
-                        <span>
-                            {
-                                props.Entry.type === 'subject' ? 'Carga horária: '
-                                    : 'Disciplinas: '
-                            }
-                        </span>
-                        <span>
-                            {
-                                props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).workLoad
-                                    : arrayCompare((props.EntryTarget as teacherObject).subjects, []) ? 'Nenhum cadastro' :
-                                        (props.EntryTarget as teacherObject).subjects.map((subs, i) =>
-                                            <span key={"TeacherSubjects"+i}>{subs.title}</span>
+                    <span className="text-school font-bold">Horários obrigatórios: </span>
+                    {
+                        arrayCompare(props.EntryTarget.musts, []) ? 'Nenhuma obrigatoriedade' :
+                            <ul>
+                                {
+                                    props.EntryTarget
+                                        .musts
+                                        .sort((a, b) => sortArray(a.hour.toString(), b.hour.toString(), 'number'))
+                                        .sort((a, b) => sortArray(a.dayOfWeek, b.dayOfWeek, 'week'))
+                                        .map((must, i) =>
+                                            <li key={props.Entry.type + "Musts" + i}>{must.dayOfWeek + " - " + must.hour + "º horário"}</li>
                                         )
-                            }
-                        </span>
-                    </div>
-                    <div>
-                        <span>Horários obrigatórios: </span>
-                        {
-                            arrayCompare(props.EntryTarget.musts, []) ? 'Nenhuma obrigatoriedade' :
-                                props.EntryTarget.musts.map((must, i) =>
-                                    <span key={props.Entry.type+"Musts"+i}>{"Dia: " + must.dayOfWeek + " - " + must.hour + "º horário"}</span>
-                                )
-                        }
-                    </div>
-                    <div>
-                        <span>Restrição de horários: </span>
-                        {
-                            arrayCompare(props.EntryTarget.restrictions, []) ? 'Nenhuma restrição' :
-                                props.EntryTarget.restrictions.map((restriction, i) =>
-                                    <span key={props.Entry.type+"Musts"+i}>{"Dia: " + restriction.dayOfWeek + " - " + restriction.hour + "º horário"}</span>
-                                )
-                        }
-                    </div>
+                                }
+                            </ul>
+                    }
+                </div>
+                <div>
+                    <span className="text-school font-bold">Restrição de horários: </span>
+                    {
+                        arrayCompare(props.EntryTarget.restrictions, []) ? 'Nenhuma restrição' :
+                            <ul>
+                                {
+                                    props.EntryTarget
+                                        .restrictions
+                                        .sort((a, b) => sortArray(a.hour.toString(), b.hour.toString(), 'number'))
+                                        .sort((a, b) => sortArray(a.dayOfWeek, b.dayOfWeek, 'week'))
+                                        .map((restriction, i) =>
+                                            <li key={props.Entry.type + "Musts" + i}>{restriction.dayOfWeek + " - " + restriction.hour + "º horário"}</li>
+                                        )
+                                }
+                            </ul>
+                    }
                 </div>
             </div>
         </form>

@@ -4,7 +4,7 @@ import WeekGrid from "./weekGrid";
 
 export default function Restrictions(props: SetterProps) {
     return (
-        <div id={props.id} hidden>
+        <div id={props.id} hidden >
             <ParagraphComponent content={explanation}></ParagraphComponent>
             <WeekGrid Entry={props.Entry} EntryTarget={props.EntryTarget} setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher} id={props.Entry.type + "RestrictionsGrid"} gridType="restriction"></WeekGrid>
 

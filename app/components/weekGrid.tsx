@@ -1,4 +1,5 @@
 import { SetterProps, subjectObject, teacherObject } from "@/types/types";
+import MainTitleComponent from "./mainTitle";
 
 export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, setEntryTargetTeacher, id, gridType }: SetterProps) {
     const week: Array<'Segunda-feira' | 'Terça-feira' | 'Quarta-feira' | 'Quinta-feira' | 'Sexta-feira'> = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira',];
@@ -26,8 +27,8 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
-                if(el)
-                el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
+                if (el)
+                    el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
             if (gridType === 'restriction') {
 
@@ -44,8 +45,8 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
-                if(el)
-                el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
+                if (el)
+                    el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
             }
         }
 
@@ -68,8 +69,8 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
-                if(el)
-                el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
+                if (el)
+                    el.style.backgroundColor === 'rgb(98, 191, 17)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#62bf11'
             }
 
             if (gridType === 'restriction') {
@@ -87,8 +88,8 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 Entry.setList(aux);
 
-                if(el)
-                el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
+                if (el)
+                    el.style.backgroundColor === 'rgb(237, 45, 45)' || el.style.backgroundColor === '' ? el.style.backgroundColor = '#ffffff' : el.style.backgroundColor = '#ed2d2d'
             }
         }
 
@@ -116,35 +117,43 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
     }
 
     return (
-        <div className="grid grid-cols-6 gap-2" key={Entry.type + 'grid'}>
-            <span className="flex justify-center items-center col-span-1" key={Entry.type + 'infospan'}></span>
+        <>
             {
-                week.map((day, i) =>
-                    <span className="flex justify-center items-center col-span-1" key={Entry.type + 'GridHeader' + day}>{day}</span>
-                )
+                gridType === 'must' ?
+                <MainTitleComponent text="Obrigatoriedades"></MainTitleComponent> :
+                <MainTitleComponent text="Restrições"></MainTitleComponent> 
+
             }
-            {
-                hour.map((h, i) => {
-                    return (
-                        <div key={Entry.type + 'Row' + h} className="col-span-6 grid grid-cols-subgrid gap-3">
-                            <span className="col-span-1 flex justify-center items-center h-12" key={Entry.type + 'GridTag' + h}>{h}º</span>
-                            {week.map((day, ii) =>
-                                <button
-                                    className={
-                                        `col-span-1 border border-school shadow-md flex justify-center items-center rounded-md
-                                        ${isMarked(day, h) && gridType === 'must' ? 'bg-mustMarkerd' : isMarked(day, h) && gridType === 'restriction'? 'bg-restrictionMarked' : 'bg-white'}
-                                        `
-                                    }
-                                    key={Entry.type + 'GridBody' + h + day + ii}
-                                    id={Entry.type + 'GridBody' + h + day + ii}
-                                    onClick={() => { onClickHandler(Entry.type + gridType + 'GridBody' + h + day + ii, day, h) }}
-                                ></button>
-                            )}
-                        </div>
+            <div className="grid grid-cols-6 gap-2" key={Entry.type + 'grid'}>
+                <span className="flex justify-center items-center col-span-1" key={Entry.type + 'infospan'}></span>
+                {
+                    week.map((day, i) =>
+                        <span className="flex justify-center items-center col-span-1" key={Entry.type + 'GridHeader' + day}>{day}</span>
                     )
                 }
-                )
-            }
-        </div>
+                {
+                    hour.map((h, i) => {
+                        return (
+                            <div key={Entry.type + 'Row' + h} className="col-span-6 grid grid-cols-subgrid gap-3">
+                                <span className="col-span-1 flex justify-center items-center h-12" key={Entry.type + 'GridTag' + h}>{h}º</span>
+                                {week.map((day, ii) =>
+                                    <button
+                                        className={
+                                            `col-span-1 border border-school shadow-md flex justify-center items-center rounded-md
+                                        ${isMarked(day, h) && gridType === 'must' ? 'bg-mustMarkerd' : isMarked(day, h) && gridType === 'restriction' ? 'bg-restrictionMarked' : 'bg-white'}
+                                        `
+                                        }
+                                        key={Entry.type + 'GridBody' + h + day + ii}
+                                        id={Entry.type + 'GridBody' + h + day + ii}
+                                        onClick={() => { onClickHandler(Entry.type + gridType + 'GridBody' + h + day + ii, day, h) }}
+                                    ></button>
+                                )}
+                            </div>
+                        )
+                    }
+                    )
+                }
+            </div>
+        </>
     )
 } 
