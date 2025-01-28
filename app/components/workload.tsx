@@ -25,9 +25,9 @@ export default function WorkLoad(props: SetterProps) {
     return (
         <div id={props.id} hidden>
              <ParagraphComponent content={explanation}></ParagraphComponent>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 flex-wrap">
                 <MainTitleComponent text="Carga horária"></MainTitleComponent>
-                <form action={handleSubmit} className="flex flex-row items-center justify-center gap-4">
+                <form action={handleSubmit} className="flex flex-row items-center justify-center gap-4 flex-wrap">
                     <label htmlFor="workloadInput">Carga Horária: </label>
                     <input type="text" name="workloadInput" id="workloadInput" defaultValue={(props.EntryTarget as subjectObject).workLoad}
                         className="outline outline-school rounded-xl p-2"
