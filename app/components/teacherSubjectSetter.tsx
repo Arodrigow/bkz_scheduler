@@ -3,7 +3,7 @@ import arrayCompare from "../utils/arrayCompare";
 import ButtonComponent from "./button";
 import MainTitleComponent from "./mainTitle";
 
-export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTargetSubject, setEntryTargetTeacher, id, gridType, SubjectEntry }: SetterProps) {
+export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTargetTeacher, SubjectEntry }: SetterProps) {
     const selectId = Entry.type + 'TeacherSubjectSetterSelect';
 
     const handleSubmit = () => {
@@ -34,9 +34,9 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
     const onClickHandler = (subjectName: string) => {
         if (!setEntryTargetTeacher) return;
         const index = (Entry.list as teacherObject[]).findIndex((value) => value.name === (EntryTarget as teacherObject).name);
-        
+
         let aux: Array<teacherObject> = Array.from(Entry.list as Array<teacherObject>);
-        
+
         const auxIndex = aux[index].subjects.findIndex((subject) => subject.title === subjectName);
         aux[index].subjects.splice(auxIndex, 1);
 
@@ -50,7 +50,8 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
         Entry.setList(aux);
     }
     return (
-        <div>
+        <div className="flex flex-col gap-4">
+            <MainTitleComponent text="Disciplinas"></MainTitleComponent>
             <form action={handleSubmit} className="flex flex-row gap-4 flex-wrap justify-center items-center">
                 <label htmlFor={selectId}>Matéria: </label>
                 <select name={selectId} id={selectId} className="outline outline-school rounded-xl p-2">
@@ -65,13 +66,12 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
             </form>
 
             <div className="flex flex-col gap-4 justify-center items-center">
-                <MainTitleComponent text="Disciplinas"></MainTitleComponent>
                 {
                     arrayCompare((EntryTarget as teacherObject).subjects, []) ? 'Nenhuma matéria cadastrada' :
                         (EntryTarget as teacherObject).subjects.map((subject, i) =>
-                            <div key={Entry.type + "TeacherSubjectsList" + i} className="flex flex-row">
+                            <div key={Entry.type + "TeacherSubjectsList" + i} className="flex justify-between gap-4">
                                 <span>{subject.title}</span>
-                                <ButtonComponent text="Deletar" type="delete" onClickHandler={() => onClickHandler(subject.title)}></ButtonComponent>
+                                <ButtonComponent text="Apagar" type="delete" onClickHandler={() => onClickHandler(subject.title)}></ButtonComponent>
                             </div>
                         )
                 }
