@@ -7,30 +7,32 @@ import Restrictions from "./restrictions";
 
 
 export default function Setter(props: InfoSetProps) {
+    const mustId = props.Entry.type === 'subject' ? Ids.subjectMustsInfoId : Ids.teacherMustsInfoId
+    const restrictionId = props.Entry.type === 'subject' ? Ids.subjectRestrictionsInfoId : Ids.teacherRestrictionsInfoId
 
     const handler = (type: string) => {
-        const workLoad = document.getElementById('workLoadInfo')
-        const subjectInfo = document.getElementById('subjectInfo')
-        const musts = document.getElementById('mustsInfo')
-        const restrictions = document.getElementById('restrictionsInfo')
+        const workLoad = document.getElementById(Ids.subjectWorkLoadId)
+        const subjectInfo = document.getElementById(Ids.teacherSubjectId)
+        const musts = document.getElementById(mustId)
+        const restrictions = document.getElementById(restrictionId)
 
         if (workLoad && musts && restrictions && subjectInfo) {
-            if (type === 'workLoad') {
+            if (type === Ids.subjectWorkLoadId) {
                 workLoad.hidden = false;
                 musts.hidden = true;
                 restrictions.hidden = true;
             }
-            if (type === 'subjectInfo') {
+            if (type === Ids.teacherSubjectId) {
                 subjectInfo.hidden = false;
                 musts.hidden = true;
                 restrictions.hidden = true;
             }
-            if (type === 'mustsInfo') {
+            if (type === mustId) {
                 workLoad.hidden = true;
                 musts.hidden = false;
                 restrictions.hidden = true
             }
-            if (type === 'restrictionsInfo') {
+            if (type === restrictionId) {
                 workLoad.hidden = true;
                 musts.hidden = true;
                 restrictions.hidden = false
@@ -46,20 +48,51 @@ export default function Setter(props: InfoSetProps) {
             <div className="w-full flex flex-row gap-4 flex-wrap justify-around items-center">
                 {
                     props.Entry.type === 'subject' ?
-                        <ButtonComponent text="Carga horária" type="choose" onClickHandler={() => handler('workLoad')}></ButtonComponent>
+                        <ButtonComponent text="Carga horária" type="choose" onClickHandler={() => handler(Ids.subjectWorkLoadId)}></ButtonComponent>
                         :
-                        <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler('subjectInfo')}></ButtonComponent>
+                        <ButtonComponent text="Disciplinas" type="choose" onClickHandler={() => handler(Ids.teacherSubjectId)}></ButtonComponent>
                 }
-                <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler('mustsInfo')}></ButtonComponent>
-                <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler('restrictionsInfo')}></ButtonComponent>
+                <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler(mustId)}></ButtonComponent>
+                <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler(restrictionId)}></ButtonComponent>
             </div>
             <div>
+                {
+                    props.Entry.type === 'subject' ?
+                        <WorkLoad
+                            Entry={props.Entry}
+                            EntryTarget={props.EntryTarget}
+                            id={Ids.subjectWorkLoadId}
+                            setEntryTargetSubject={props.setEntryTargetSubject}
+                        ></WorkLoad>
+                        :
+                        <div id="subjectInfo" hidden>subjectInfo</div>
+                }
 
-                <WorkLoad Entry={props.Entry} EntryTarget={props.EntryTarget} id="workLoadInfo" setEntryTargetSubject={props.setEntryTargetSubject}></WorkLoad>
-                <div id="subjectInfo" hidden>subjectInfo</div>
-                <Musts Entry={props.Entry} EntryTarget={props.EntryTarget} id="mustsInfo" setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher}></Musts>
-                <Restrictions Entry={props.Entry} EntryTarget={props.EntryTarget} id="restrictionsInfo" setEntryTargetSubject={props.setEntryTargetSubject} setEntryTargetTeacher={props.setEntryTargetTeacher}></Restrictions>
+                <Musts
+                    Entry={props.Entry}
+                    EntryTarget={props.EntryTarget}
+                    id={mustId}
+                    setEntryTargetSubject={props.setEntryTargetSubject}
+                    setEntryTargetTeacher={props.setEntryTargetTeacher}
+                ></Musts>
+
+                <Restrictions
+                    Entry={props.Entry}
+                    EntryTarget={props.EntryTarget}
+                    id={restrictionId}
+                    setEntryTargetSubject={props.setEntryTargetSubject}
+                    setEntryTargetTeacher={props.setEntryTargetTeacher}
+                ></Restrictions>
             </div>
-        </div>
+        </div >
     )
+}
+
+const Ids = {
+    subjectWorkLoadId: 'workLoadInfo',
+    teacherSubjectId: 'subjectInfo',
+    subjectMustsInfoId: 'subjectMustsInfoId',
+    teacherMustsInfoId: 'teachertMustsInfoId',
+    subjectRestrictionsInfoId: 'subjectRestrictionsInfoId',
+    teacherRestrictionsInfoId: 'teacherRestrictionsInfoId',
 }
