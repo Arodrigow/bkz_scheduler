@@ -11,6 +11,7 @@ export default async function CriarPage() {
             <ParagraphComponent content={paragraphContent1}></ParagraphComponent>
             <hr className="h-4" />
             <RegisterSection></RegisterSection>
+            <hr className="h-4" />
         </div>
 
     )

@@ -1,6 +1,7 @@
 import { chatGPT } from "@/app/utils/chatGPT";
-import { teacherObject } from "@/types/types";
+import { gptReturn, teacherObject } from "@/types/types";
 
-export const getSchedule = (data: teacherObject[]) => {
-    chatGPT(data);
+export const getSchedule = async (data: teacherObject[], setSchedule: ((newState: gptReturn) => void)) => {
+    const res = await chatGPT(data);
+    setSchedule(res);
 }

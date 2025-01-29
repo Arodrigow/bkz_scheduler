@@ -103,3 +103,47 @@ export type InfoSetProps = {
     setEntryTargetSubject?: ((newState: subjectObject) => void),
     setEntryTargetTeacher?: ((newState: teacherObject) => void),
 }
+
+export type gptReturn = {
+    Segunda?:{
+        1:Array<string>,
+        2:Array<string>,
+        3:Array<string>,
+        4:Array<string>,
+        5:Array<string>,
+        6:Array<string>
+    };
+    Terca?: {
+        1:Array<string>,
+        2:Array<string>,
+        3:Array<string>,
+        4:Array<string>,
+        5:Array<string>,
+        6:Array<string>
+    };
+    Quarta?: {
+        1:Array<string>,
+        2:Array<string>,
+        3:Array<string>,
+        4:Array<string>,
+        5:Array<string>,
+        6:Array<string>
+    };
+    Quinta?: {
+        1:Array<string>,
+        2:Array<string>,
+        3:Array<string>,
+        4:Array<string>,
+        5:Array<string>,
+        6:Array<string>
+    };
+    Sexta?: {
+        1:Array<string>,
+        2:Array<string>,
+        3:Array<string>,
+        4:Array<string>,
+        5:Array<string>,
+        6:Array<string>
+    };
+    Other?: string;
+}
