@@ -21,3 +21,27 @@ export const getWeekDay = (dayNum: number): 'Segunda-feira' | 'Terça-feira' | '
             break;
     }
 }
+
+export const getWeekDayObjName = (day: 'Segunda-feira' | 'Terça-feira' | 'Quarta-feira' | 'Quinta-feira' | 'Sexta-feira'): 'Segunda' | 'Terca' | 'Quarta' | 'Quinta' | 'Sexta' => {
+    switch (day) {
+        case 'Segunda-feira':
+            return 'Segunda'
+            break;
+        case 'Terça-feira':
+            return 'Terca'
+            break;
+        case 'Quarta-feira':
+            return 'Quarta'
+            break;
+        case 'Quinta-feira':
+            return 'Quinta'
+            break;
+        case 'Sexta-feira':
+            return 'Sexta'
+            break;
+    
+        default:
+            return 'Segunda'
+            break;
+    }
+}

@@ -2,6 +2,7 @@
 import MainTitleComponent from "../components/mainTitle";
 import ParagraphComponent from "../components/paragraph";
 import RegisterSection from "../components/registerSection";
+import SchedulerSection from "../components/schedulerSection";
 
 export default async function CriarPage() {
     return (
@@ -11,7 +12,8 @@ export default async function CriarPage() {
             <ParagraphComponent content={paragraphContent1}></ParagraphComponent>
             <hr className="h-4" />
             <RegisterSection></RegisterSection>
-            <hr className="h-4" />
+            <hr className="h-12" />
+            <SchedulerSection></SchedulerSection>
         </div>
 
     )

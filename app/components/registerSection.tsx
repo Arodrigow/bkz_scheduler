@@ -46,7 +46,7 @@ export default function RegisterSection() {
     };
 
     return (
-        <div className="flex flex-col gap-4 w-full ">
+        <section className="flex flex-col gap-4 w-full ">
             <AccordionComponent id="Accordion1" step="1" title="Cadastrar as matérias" stepGuide={step1}>
                 <AddWraper Entry={subjectEntry}></AddWraper>
             </AccordionComponent>
@@ -60,7 +60,7 @@ export default function RegisterSection() {
                 <InfoSetterWrapper Entry={teacherEntry} SubjectEntry={subjectEntry} EntryTarget={teacher} setEntryTargetTeacher={setTeacher}></InfoSetterWrapper>
             </AccordionComponent>
             <ButtonComponent text="GERAR HORÁRIO" type="choose" onClickHandler={() => getSchedule(teacherList, setSchedule)}></ButtonComponent>
-        </div>
+        </section>
 
     )
 }

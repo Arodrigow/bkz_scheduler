@@ -135,7 +135,7 @@ const teachers = [
     },...
 }
 
-I don't need the step by step and neither a explanation, just want to get back a pure JSON with no markings. If there are any errors or suggestion, return Error: ["your error"] or Warning: ["your suggestion"], as its own string, no need to be a json.
+I don't need the step by step and neither a explanation, just want to get back a pure JSON with no markings, where each element of the hour array must be comprised of subject and teacher name. If there are any errors or suggestion, return Error: ["your error"] or Warning: ["your suggestion"], as its own string, no need to be a json.
 If there isn't an error or suggestion, the return must me JSON.parseble to the following type:
 
 type gptReturn = {
