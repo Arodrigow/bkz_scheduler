@@ -7,17 +7,18 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
     const selectId = Entry.type + 'TeacherSubjectSetterSelect';
 
     const handleSubmit = () => {
-        const value = (document.getElementById(selectId) as HTMLInputElement).value;
+        const value = (document.getElementById(selectId) as HTMLInputElement).value.split(' ');
+
         if (!SubjectEntry) return;
         if (!setEntryTargetTeacher) return;
 
         const index = (Entry.list as teacherObject[]).findIndex((value) => value.name === (EntryTarget as teacherObject).name);
-        const subjectIndex = SubjectEntry.list.findIndex((subject) => subject.title === value);
+        const subjectIndex = SubjectEntry.list.findIndex((subject) => subject.title === value[0] && subject.classes.findIndex((cl) => cl === value[1]) !== -1);
 
         let aux: Array<teacherObject> = Array.from(Entry.list as Array<teacherObject>);
 
-        const auxIndex = aux[index].subjects.findIndex((subject) => subject.title === value);
-
+        const auxIndex = aux[index].subjects.findIndex((subject) => subject.title === value[0] && subject.classes.findIndex((cl) => cl === value[1]) !== -1);
+        
         auxIndex === -1 ? aux[index].subjects.push(SubjectEntry.list[subjectIndex]) : window.alert("Matéria já cadastrada neste professor.");
 
         setEntryTargetTeacher({
@@ -58,8 +59,13 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
                     {
                         SubjectEntry ?
                             arrayCompare(SubjectEntry.list, []) ? 'Nenhum cadastro' : SubjectEntry.list.map((unit, i) =>
-                                <option value={unit.title} key={SubjectEntry.type + "teacherSubjectOptions" + i}>{unit.title}</option>
-                            ) : <option value="Nenhum cadastro"></option>
+                                arrayCompare(SubjectEntry.list[i].classes, []) ?
+                                    <option value={unit.title} key={SubjectEntry.type + "teacherSubjectOptionsClassEmpty" + i}>{unit.title}</option> :
+                                    SubjectEntry.list[i].classes.map((cl, ii) =>
+                                        <option value={unit.title + " " + cl} key={SubjectEntry.type + `teacherSubjectOptions`+ unit.title+ cl + ii}>{unit.title + " " + cl}</option>
+                                    )
+                            ) : <option value={'Nenhum cadastro'}></option>
+
                     }
                 </select>
                 <ButtonComponent text="Adicionar" type="add"></ButtonComponent>

@@ -5,6 +5,7 @@ import WorkLoad from "./workload";
 import Musts from "./musts";
 import Restrictions from "./restrictions";
 import TeacherSubjects from "./teacherSubjects";
+import SubjectClasses from "./subjectClasses";
 
 
 export default function Setter(props: InfoSetProps) {
@@ -14,31 +15,43 @@ export default function Setter(props: InfoSetProps) {
     const handler = (type: string) => {
         const workLoad = document.getElementById(Ids.subjectWorkLoadId)
         const subjectInfo = document.getElementById(Ids.teacherSubjectId)
+        const classesInfo = document.getElementById(Ids.subjectClassesInfoId)
         const musts = document.getElementById(mustId)
         const restrictions = document.getElementById(restrictionId)
 
-        if (workLoad && musts && restrictions && subjectInfo) {
+        if (workLoad && musts && restrictions && subjectInfo && classesInfo) {
             if (type === Ids.subjectWorkLoadId) {
                 workLoad.hidden = false;
                 musts.hidden = true;
                 restrictions.hidden = true;
+                classesInfo.hidden = true;
             }
             if (type === Ids.teacherSubjectId) {
                 subjectInfo.hidden = false;
                 musts.hidden = true;
                 restrictions.hidden = true;
+                classesInfo.hidden = true;
             }
             if (type === mustId) {
                 workLoad.hidden = true;
                 musts.hidden = false;
                 restrictions.hidden = true;
                 subjectInfo.hidden = true;
+                classesInfo.hidden = true;
             }
             if (type === restrictionId) {
                 workLoad.hidden = true;
                 musts.hidden = true;
                 restrictions.hidden = false;
                 subjectInfo.hidden = true;
+                classesInfo.hidden = true;
+            }
+            if (type === Ids.subjectClassesInfoId) {
+                workLoad.hidden = true;
+                musts.hidden = true;
+                restrictions.hidden = true
+                subjectInfo.hidden = true;
+                classesInfo.hidden = false;
             }
         }
 
@@ -54,6 +67,12 @@ export default function Setter(props: InfoSetProps) {
                         <ButtonComponent text="Carga horária" type="choose" onClickHandler={() => handler(Ids.subjectWorkLoadId)}></ButtonComponent>
                         :
                         <ButtonComponent text="Matérias" type="choose" onClickHandler={() => handler(Ids.teacherSubjectId)}></ButtonComponent>
+                }
+                {
+                    props.Entry.type === 'subject' ?
+                        <ButtonComponent text="Turma" type="choose" onClickHandler={() => handler(Ids.subjectClassesInfoId)}></ButtonComponent>
+                        :
+                        null
                 }
                 <ButtonComponent text="Obrigatoriedades" type="choose" onClickHandler={() => handler(mustId)}></ButtonComponent>
                 <ButtonComponent text="Restrições" type="choose" onClickHandler={() => handler(restrictionId)}></ButtonComponent>
@@ -76,7 +95,15 @@ export default function Setter(props: InfoSetProps) {
                             setEntryTargetTeacher={props.setEntryTargetTeacher}
                         ></TeacherSubjects>
                 }
-
+                {
+                    props.Entry.type === 'subject' ?
+                        <SubjectClasses
+                            Entry={props.Entry}
+                            EntryTarget={props.EntryTarget}
+                            id={Ids.subjectClassesInfoId}
+                            setEntryTargetSubject={props.setEntryTargetSubject}
+                        ></SubjectClasses> : null
+                }
                 <Musts
                     Entry={props.Entry}
                     EntryTarget={props.EntryTarget}
@@ -101,6 +128,7 @@ const Ids = {
     subjectWorkLoadId: 'workLoadInfo',
     teacherSubjectId: 'subjectInfo',
     subjectMustsInfoId: 'subjectMustsInfoId',
+    subjectClassesInfoId: 'subjectClassesInfoId',
     teacherMustsInfoId: 'teachertMustsInfoId',
     subjectRestrictionsInfoId: 'subjectRestrictionsInfoId',
     teacherRestrictionsInfoId: 'teacherRestrictionsInfoId',

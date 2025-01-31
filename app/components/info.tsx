@@ -76,6 +76,25 @@ export default function Info(props: InfoSetProps) {
                         }
                     </span>
                 </div>
+                {
+                     props.Entry.type === 'subject' ? 
+                    <div>
+                        <span className="text-school font-bold">Turmas: </span>
+                        {
+                            arrayCompare((props.EntryTarget as subjectObject).classes, []) ? 'Nenhuma Turma' :
+                                <ul>
+                                    {
+                                        (props.EntryTarget as subjectObject)
+                                            .classes
+                                            .sort((a, b) => sortArray(a, b, 'string'))
+                                            .map((cl, i) =>
+                                                <li key={props.Entry.type + "Classes" + i}>{"Turma: " + cl}</li>
+                                            )
+                                    }
+                                </ul>
+                    }
+                    </div> : null
+                }
                 <div>
                     <span className="text-school font-bold">Horários obrigatórios: </span>
                     {

@@ -20,6 +20,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 setEntryTargetSubject({
                     musts: aux[index].musts,
+                    classes:(EntryTarget as subjectObject).classes,
                     title: (EntryTarget as subjectObject).title,
                     restrictions: EntryTarget.restrictions,
                     workLoad: (EntryTarget as subjectObject).workLoad
@@ -38,6 +39,7 @@ export default function WeekGrid({ Entry, EntryTarget, setEntryTargetSubject, se
 
                 setEntryTargetSubject({
                     musts: EntryTarget.musts,
+                    classes:(EntryTarget as subjectObject).classes,
                     title: (EntryTarget as subjectObject).title,
                     restrictions: aux[index].restrictions,
                     workLoad: (EntryTarget as subjectObject).workLoad

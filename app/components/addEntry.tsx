@@ -10,6 +10,7 @@ export default function AddEntry(props: EntryProps) {
             const subAux: subjectObject = {
                 title: input,
                 workLoad: 0,
+                classes:[],
                 musts:[],
                 restrictions:[]
             }

@@ -17,6 +17,7 @@ export default function RegisterSection() {
     const subjectEmpty: subjectObject = {
         musts: [],
         restrictions: [],
+        classes:[],
         title:'',
         workLoad:0
     }

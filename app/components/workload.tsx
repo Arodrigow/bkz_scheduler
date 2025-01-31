@@ -11,6 +11,7 @@ export default function WorkLoad(props: SetterProps) {
             props.setEntryTargetSubject(
                 {
                     title: (props.EntryTarget as subjectObject).title,
+                    classes: (props.EntryTarget as subjectObject).classes,
                     workLoad: value,
                     musts: (props.EntryTarget as subjectObject).musts,
                     restrictions: (props.EntryTarget as subjectObject).restrictions

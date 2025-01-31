@@ -74,6 +74,7 @@ export type restrictionObject = {
 export type subjectObject = {
     title: string,
     workLoad: number,
+    classes: Array<string>;
     restrictions: Array<restrictionObject>,
     musts: Array<restrictionObject>
 }
