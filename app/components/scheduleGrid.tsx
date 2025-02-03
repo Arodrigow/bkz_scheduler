@@ -18,18 +18,25 @@ export default function ScheduleGrid(schedule: gptReturn) {
                     hour.map((h, i) => {
                         return (
                             <div key={'ScheduleRow' + h} className="col-span-6 grid grid-cols-subgrid gap-3 ">
-                                <span className="col-span-1 flex justify-center items-center h-12 border-b-2 border-school" key={'ScheduleGridTag' + h}>{h}º</span>
+                                <span className="col-span-1 flex justify-center items-center border-b-2 border-school" key={'ScheduleGridTag' + h}>{h}º</span>
                                 {
                                     week.map((day, ii) =>
                                         <span className="flex justify-center items-center col-span-1 border-b-2 border-r-2 border-school" key={'ScheduleGridBody' + h + day + ii}>
-                                            {
-                                                schedule[getWeekDayObjName(day)]?.[h].map(
-                                                    (subject, i) =>
-                                                        <ul key={'ScheduleGrid' + day + 'List' + h}>
-                                                            <li>{subject}</li>
-                                                        </ul>
-                                                )
-                                            }
+                                            <ul className="flex flex-col flex-wrap">
+                                                {
+                                                    schedule[getWeekDayObjName(day)]?.[h].map(
+                                                        (subject, i) => {
+                                                            return (
+                                                                <div key={'ScheduleGrid' + day + 'List' + h + i}>
+                                                                    <li key={'ScheduleGrid' + day + 'List' + h + i} className="text-sm">{subject}</li>
+                                                                    <br />
+                                                                </div>
+
+                                                            )
+                                                        }
+                                                    )
+                                                }
+                                            </ul>
                                         </span>
                                     )
                                 }

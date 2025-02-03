@@ -3,10 +3,7 @@ import arrayCompare from "../utils/arrayCompare";
 import { sortArray } from "../utils/sortArray";
 
 export default function Info(props: InfoSetProps) {
-    // console.log(((props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === undefined) || (props.Entry.type === 'teacher' && (props.EntryTarget as teacherObject).name === undefined)))
-    console.log(" Teste" + (props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === ''));
-
-    const handleSelect = () => {
+      const handleSelect = () => {
         const value = (document.getElementById(props.Entry.type + "Select") as HTMLInputElement).value;
 
         if (props.Entry.type === 'subject' && props.setEntryTargetSubject) {
