@@ -3,6 +3,8 @@ import arrayCompare from "../utils/arrayCompare";
 import { sortArray } from "../utils/sortArray";
 
 export default function Info(props: InfoSetProps) {
+    // console.log(((props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === undefined) || (props.Entry.type === 'teacher' && (props.EntryTarget as teacherObject).name === undefined)))
+    console.log(" Teste" + (props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === ''));
 
     const handleSelect = () => {
         const value = (document.getElementById(props.Entry.type + "Select") as HTMLInputElement).value;
@@ -22,13 +24,19 @@ export default function Info(props: InfoSetProps) {
         <form className="flex flex-col justify-center items-center gap-4 w-full sm:w-2/5">
             <div className="flex flex-row gap-4 flex-wrap justify-center items-center">
                 <label htmlFor={props.Entry.type + 'Input'}>{props.Entry.type === 'subject' ? 'Matéria: ' : 'Professor: '}</label>
-                <select onChange={handleSelect} value={props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).title : (props.EntryTarget as teacherObject).name} name={props.Entry.type + "Select"} id={props.Entry.type + "Select"} className="outline outline-school rounded-xl p-2">
+                <select onChange={handleSelect} value={((props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === '') || (props.Entry.type === 'teacher' && (props.EntryTarget as teacherObject).name === '')) ? "selecionar" : props.Entry.type === 'subject' ? (props.EntryTarget as subjectObject).title : (props.EntryTarget as teacherObject).name} name={props.Entry.type + "Select"} id={props.Entry.type + "Select"} className="outline outline-school rounded-xl p-2">
+                    {
+                        ((props.Entry.type === 'subject' && (props.EntryTarget as subjectObject).title === '') || (props.Entry.type === 'teacher' && (props.EntryTarget as teacherObject).name === '')) ?
+                            <option value="selecionar" disabled>Selecionar {props.Entry.type === 'subject' ? 'matéria' : 'professor'}</option>
+                            :
+                            null
+                    }
                     {
                         props.Entry.type === 'subject' ?
-                            arrayCompare(props.Entry.list, []) ? 'Nenhum cadastro' : props.Entry.list.map((unit, i) =>
+                            arrayCompare(props.Entry.list, []) ? <option disabled>Nenhum cadastro</option> : props.Entry.list.map((unit, i) =>
                                 <option value={unit.title} key={props.Entry.type + "Options" + i}>{unit.title}</option>
                             ) :
-                            arrayCompare(props.Entry.list, []) ? 'Nenhum cadastro' : props.Entry.list.map((unit, i) =>
+                            arrayCompare(props.Entry.list, []) ? <option disabled>Nenhum cadastro</option> : props.Entry.list.map((unit, i) =>
                                 <option value={unit.name} key={props.Entry.type + "Options" + i}>{unit.name}</option>
                             )
                     }
@@ -66,10 +74,12 @@ export default function Info(props: InfoSetProps) {
 
                                             (props.EntryTarget as teacherObject)
                                                 .subjects
-                                                .sort((a, b) => sortArray(a.title, b.title, 'string'))
+                                                .sort((a, b) => sortArray(a.subject.title, b.subject.title, 'string'))
                                                 .map((subs, i) =>
+                                                    subs.classes.map((classe, ii) =>
+                                                        <li key={"TeacherSubjects" + ii}>{subs.subject.title + " " + classe}</li>
+                                                    )
 
-                                                    <li key={"TeacherSubjects" + i}>{subs.title}</li>
                                                 )
                                         }
                                     </ul>
@@ -77,23 +87,23 @@ export default function Info(props: InfoSetProps) {
                     </span>
                 </div>
                 {
-                     props.Entry.type === 'subject' ? 
-                    <div>
-                        <span className="text-school font-bold">Turmas: </span>
-                        {
-                            arrayCompare((props.EntryTarget as subjectObject).classes, []) ? 'Nenhuma Turma' :
-                                <ul>
-                                    {
-                                        (props.EntryTarget as subjectObject)
-                                            .classes
-                                            .sort((a, b) => sortArray(a, b, 'string'))
-                                            .map((cl, i) =>
-                                                <li key={props.Entry.type + "Classes" + i}>{"Turma: " + cl}</li>
-                                            )
-                                    }
-                                </ul>
-                    }
-                    </div> : null
+                    props.Entry.type === 'subject' ?
+                        <div>
+                            <span className="text-school font-bold">Turmas: </span>
+                            {
+                                arrayCompare((props.EntryTarget as subjectObject).classes, []) ? 'Nenhuma Turma' :
+                                    <ul>
+                                        {
+                                            (props.EntryTarget as subjectObject)
+                                                .classes
+                                                .sort((a, b) => sortArray(a, b, 'string'))
+                                                .map((cl, i) =>
+                                                    <li key={props.Entry.type + "Classes" + i}>{"Turma: " + cl}</li>
+                                                )
+                                        }
+                                    </ul>
+                            }
+                        </div> : null
                 }
                 <div>
                     <span className="text-school font-bold">Horários obrigatórios: </span>

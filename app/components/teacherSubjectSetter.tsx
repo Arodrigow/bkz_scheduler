@@ -1,4 +1,4 @@
-import { SetterProps, teacherObject } from "@/types/types";
+import { SetterProps, subjectObject, teacherObject, teachersClass } from "@/types/types";
 import arrayCompare from "../utils/arrayCompare";
 import ButtonComponent from "./button";
 import MainTitleComponent from "./mainTitle";
@@ -11,15 +11,37 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
 
         if (!SubjectEntry) return;
         if (!setEntryTargetTeacher) return;
+        if (value[1] === undefined) {
+            window.alert("Você precisa cadastrar uma turma nesta matéria.")
+            return
+        };
 
         const index = (Entry.list as teacherObject[]).findIndex((value) => value.name === (EntryTarget as teacherObject).name);
-        const subjectIndex = SubjectEntry.list.findIndex((subject) => subject.title === value[0] && subject.classes.findIndex((cl) => cl === value[1]) !== -1);
+        const subjectIndex = SubjectEntry.list.findIndex((subject) => subject.title === value[0]);
 
         let aux: Array<teacherObject> = Array.from(Entry.list as Array<teacherObject>);
 
-        const auxIndex = aux[index].subjects.findIndex((subject) => subject.title === value[0] && subject.classes.findIndex((cl) => cl === value[1]) !== -1);
-        
-        auxIndex === -1 ? aux[index].subjects.push(SubjectEntry.list[subjectIndex]) : window.alert("Matéria já cadastrada neste professor.");
+        let classAux = -1;
+        const auxIndex = aux[index].subjects.findIndex((subject, i) => {
+            if (subject.subject.title === value[0]) {
+                classAux = aux[index].subjects[i].classes.findIndex((cl) => cl === value[1]);
+                return true
+            }
+            return false
+        }
+        )
+
+        if (classAux === -1 && auxIndex === -1) {
+            let subjectAux: teachersClass;
+            let classAux: Array<string> = [];
+            classAux.push(value[1]);
+            subjectAux = ({ classes: classAux, subject: SubjectEntry.list[subjectIndex] });
+            aux[index].subjects.push(subjectAux);
+        }
+
+        if (classAux === -1 && auxIndex !== -1) {
+            aux[index].subjects[auxIndex].classes.push(value[1])
+        }
 
         setEntryTargetTeacher({
             musts: EntryTarget.musts,
@@ -32,14 +54,20 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
 
     }
 
-    const onClickHandler = (subjectName: string) => {
+    const onClickHandler = (subjectName: string, cl: string) => {
         if (!setEntryTargetTeacher) return;
         const index = (Entry.list as teacherObject[]).findIndex((value) => value.name === (EntryTarget as teacherObject).name);
 
         let aux: Array<teacherObject> = Array.from(Entry.list as Array<teacherObject>);
+        const auxIndex = aux[index].subjects.findIndex((subject) => subject.subject.title === subjectName);
 
-        const auxIndex = aux[index].subjects.findIndex((subject) => subject.title === subjectName);
-        aux[index].subjects.splice(auxIndex, 1);
+        if (arrayCompare(aux[index].subjects[auxIndex].classes, [undefined]) || aux[index].subjects[auxIndex].classes.length <= 1) {
+            aux[index].subjects.splice(auxIndex, 1);
+        } else if (aux[index].subjects[auxIndex].classes.length > 1) {
+            const classeIndex = aux[index].subjects[auxIndex].classes.findIndex((classe, i) => classe === cl)
+            aux[index].subjects[auxIndex].classes.splice(classeIndex, 1)
+        }
+
 
         setEntryTargetTeacher({
             musts: EntryTarget.musts,
@@ -62,7 +90,7 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
                                 arrayCompare(SubjectEntry.list[i].classes, []) ?
                                     <option value={unit.title} key={SubjectEntry.type + "teacherSubjectOptionsClassEmpty" + i}>{unit.title}</option> :
                                     SubjectEntry.list[i].classes.map((cl, ii) =>
-                                        <option value={unit.title + " " + cl} key={SubjectEntry.type + `teacherSubjectOptions`+ unit.title+ cl + ii}>{unit.title + " " + cl}</option>
+                                        <option value={unit.title + " " + cl} key={SubjectEntry.type + `teacherSubjectOptions` + unit.title + cl + ii}>{unit.title + " " + cl}</option>
                                     )
                             ) : <option value={'Nenhum cadastro'}></option>
 
@@ -75,10 +103,12 @@ export default function TeacherSubjectSetter({ Entry, EntryTarget, setEntryTarge
                 {
                     arrayCompare((EntryTarget as teacherObject).subjects, []) ? 'Nenhuma matéria cadastrada' :
                         (EntryTarget as teacherObject).subjects.map((subject, i) =>
-                            <div key={Entry.type + "TeacherSubjectsList" + i} className="flex justify-between gap-4">
-                                <span>{subject.title}</span>
-                                <ButtonComponent text="Apagar" type="delete" onClickHandler={() => onClickHandler(subject.title)}></ButtonComponent>
-                            </div>
+                            subject.classes.map((classe, ii) =>
+                                <div key={Entry.type + "TeacherSubjectsList" + subject.subject + classe} className="flex justify-between gap-4">
+                                    <span>{subject.subject.title + " " + classe}</span>
+                                    <ButtonComponent text="Apagar" type="delete" onClickHandler={() => onClickHandler(subject.subject.title, classe)}></ButtonComponent>
+                                </div>
+                            )
                         )
                 }
             </div>

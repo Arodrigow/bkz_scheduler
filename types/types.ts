@@ -79,9 +79,14 @@ export type subjectObject = {
     musts: Array<restrictionObject>
 }
 
+export type teachersClass = {
+    classes: Array<string>,
+    subject: subjectObject
+}
+
 export type teacherObject = {
     name: string,
-    subjects: Array<subjectObject>,
+    subjects: Array<teachersClass>,
     restrictions: Array<restrictionObject>
     musts: Array<restrictionObject>
 }
